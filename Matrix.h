@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define FORi(start, stop) for (int i = start; i < stop; i += 1)
 #define FORj(start, stop) for (int j = start; j < stop; j += 1)
 class Matrix {

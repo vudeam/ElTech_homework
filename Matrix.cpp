@@ -1,4 +1,4 @@
-#include "Matrix.h"
+﻿#include "Matrix.h"
 #include <iostream>
 
 Matrix::Matrix(void) {};
@@ -34,3 +34,36 @@ double Matrix3x3::Det(void) {
 			(this->matrix[1][0] * this->matrix[0][1] * this->matrix[2][2])
 			);
 }
+double Matrix3x3::Det1(double* _replace1) {
+	return (
+		(_replace1[0] * this->matrix[1][1] * this->matrix[2][2]) +
+		(this->matrix[0][1] * this->matrix[1][2] * _replace1[2]) +
+		(_replace1[1] * this->matrix[2][1] * this->matrix[0][2])
+		) - (
+			(this->matrix[0][2] * this->matrix[1][1] * _replace1[2]) +
+			(this->matrix[2][1] * this->matrix[1][2] * _replace1[0]) +
+			(_replace1[1] * this->matrix[0][1] * this->matrix[2][2])
+			);
+};
+double Matrix3x3::Det2(double* _replace2) {
+	return (
+		(this->matrix[0][0] * _replace2[1] * this->matrix[2][2]) +
+		(_replace2[0] * this->matrix[1][2] * this->matrix[2][0]) +
+		(this->matrix[1][0] * _replace2[2] * this->matrix[0][2])
+		) - (
+			(this->matrix[0][2] * _replace2[1] * this->matrix[2][0]) +
+			(_replace2[2] * this->matrix[1][2] * this->matrix[0][0]) +
+			(this->matrix[1][0] * _replace2[0] * this->matrix[2][2])
+			);
+}
+double Matrix3x3::Det3(double* _replace3) {
+	return (
+		(this->matrix[0][0] * this->matrix[1][1] * _replace3[2]) +
+		(this->matrix[0][1] * _replace3[1] * this->matrix[2][0]) +
+		(this->matrix[1][0] * this->matrix[2][1] * _replace3[0])
+		) - (
+			(_replace3[0] * this->matrix[1][1] * this->matrix[2][0]) +
+			(this->matrix[2][1] * _replace3[1] * this->matrix[0][0]) +
+			(this->matrix[1][0] * this->matrix[0][1] * _replace3[2])
+			);
+};
