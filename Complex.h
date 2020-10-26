@@ -10,11 +10,14 @@ public:
 	Complex(double);
 	Complex(double, double);
 	Complex(Complex&);
+	double Real(void);
+	double Imag(void);
+	double abs(void);
 	Complex& operator = (const Complex&);
-	Complex& operator + (const Complex&);
-	Complex& operator - (const Complex&);
-	Complex& operator * (const Complex&);
-	Complex& operator / (const Complex&);
+	Complex& operator + (const Complex&) const;
+	Complex& operator - (const Complex&) const;
+	Complex& operator * (const Complex&) const;
+	Complex& operator / (const Complex&) const;
 	friend std::ostream& operator << (std::ostream&, const Complex&);
 };
 

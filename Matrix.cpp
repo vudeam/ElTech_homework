@@ -1,19 +1,19 @@
-﻿#include "Matrix.h"
-#include <iostream>
+﻿#include <iostream>
+#include "Matrix.h"
 
 Matrix::Matrix(void) {};
 Matrix::Matrix(double** _matrix, size_t _cols, size_t _rows) : cols(_cols), rows(_rows) {
 	this->matrix = new double* [this->rows];
-	FORi(0, this->cols) this->matrix[i] = new double[this->cols];
-	FORi(0, this->cols)
-		FORj(0, this->rows)
+	for (int i = 0; i < this->cols; i++) this->matrix[i] = new double[this->cols];
+	for (int i = 0; i < this->cols; i++)
+		for (int j = 0; j < this->rows; j++)
 		this->matrix[i][j] = _matrix[i][j];
 
 };
 double Matrix::Det(void) { return 0; };
 void Matrix::Print(void) {
-	FORi(0, this->rows) {
-		FORj(0, this->cols)
+	for (int i = 0; i < this->rows; i++) {
+		for (int j = 0; j < this->cols; j++)
 			std::cout << this->matrix[i][j] << '\t';
 		std::cout << std::endl;
 	};

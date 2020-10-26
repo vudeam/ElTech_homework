@@ -2,9 +2,11 @@
 #include <iomanip>
 #include <Windows.h>
 
-#include "stuff.h"
 #include "Matrix.h"
 #include "Complex.h"
+
+#define FORi(start, stop) for (int i = start; i < stop; i++)
+#define FORj(start, stop) for (int j = start; j < stop; j++)
 
 void HW1(void);
 
@@ -13,7 +15,7 @@ double** M_R = nullptr; // Матрица сопротивлений
 double** M_G = nullptr; // Матрица проводимостей
 
 int main(void) {
-	// HW1();
+	//HW1();
 
 	Complex num1(13, 1);
 	Complex num2(7, -6);
@@ -23,7 +25,9 @@ int main(void) {
 	std::cout << num1 << " * " << num2 << " : " << num1 * num2 << std::endl;
 	std::cout << num1 << " / " << num2 << " : " << num1 / num2 << std::endl;
 
-	std::cout << "[Enter]";
+
+	std::cin.clear(); std::cin.ignore(std::cin.rdbuf()->in_avail()); _flushall();
+	std::cout << std::endl << "[Enter]";
 	std::cin.get();
 
 	return 0;
@@ -125,12 +129,12 @@ void HW1(void) {
 	FORj(0, 6) std::cout << 'I' << j + 1 << "    |";
 	std::cout << std::endl << fillLine << std::endl;
 	std::cout << '|' << std::left << std::setw(11) << "М. К. Т." << '|';
-	std::cout << std::setw(6) << std::fixed << std::setprecision(3) << I1 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I2 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I3 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I4 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I5 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I6 << '|' << std::endl;
+	std::cout << std::right << std::setw(6) << std::fixed << std::setprecision(3) << I1 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I2 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I3 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I4 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I5 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I6 << '|' << std::endl;
 	
 	delete[] arr_E1;
 	delete[] M_R;
@@ -141,15 +145,15 @@ void HW1(void) {
 	double phi1, phi2, phi3;
 	M_G = new double* [3];
 	FORi(0, 3) M_G[i] = new double[3];
-	M_G[0][0] = reverse_sum(R1, R4, R6);
+	M_G[0][0] = (1. / R1) + (1. / R4) + (1. / R6);
 	M_G[0][1] = -1. / R1;
 	M_G[0][2] = -1. / R6;
 	M_G[1][0] = -1. / R1;
-	M_G[1][1] = reverse_sum(R1, R2, R3);
+	M_G[1][1] = (1. / R1) + (1. / R2) + (1. / R3);
 	M_G[1][2] = -1. / R3;
 	M_G[2][0] = -1. / R6;
 	M_G[2][1] = -1. / R3;
-	M_G[2][2] = reverse_sum(R3, R5, R6);
+	M_G[2][2] = (1. / R3) + (1. / R5) + (1. / R6);
 	
 	double* arr_E2 = new double[3];
 	arr_E2[0] = -(E1 / R1) - (E4 / R4) - (E6 / R6);
@@ -169,12 +173,12 @@ void HW1(void) {
 
 	std::cout << fillLine << std::endl;
 	std::cout << '|' << std::left << std::setw(11) << "М. У. П." << '|';
-	std::cout << std::setw(6) << std::fixed << std::setprecision(3) << I1 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I2 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I3 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I4 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I5 << '|' <<
-		std::setw(6) << std::fixed << std::setprecision(3) << I6 << '|' << std::endl;
+	std::cout << std::right << std::setw(6) << std::fixed << std::setprecision(3) << I1 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I2 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I3 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I4 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I5 << '|' <<
+		std::right << std::setw(6) << std::fixed << std::setprecision(3) << I6 << '|' << std::endl;
 	std::cout << fillLine;
 	
 	delete[] arr_E2;
@@ -197,11 +201,6 @@ void HW1(void) {
 	Uxx = R2*Ib + R4*Ia + E1 - E2 - E4;
 	std::cout << std::endl << "Метод эквивалентного двухполюсника: I1 = " << Uxx / (Rin + R1) << 'A' << std::endl;
 	/*-------------------------Конец метода эквивалентного двухполюсника-------------------------*/
-
-
-	std::cin.clear(); std::cin.ignore(std::cin.rdbuf()->in_avail()); _flushall();
-	std::cout << std::endl << "[Enter]";
-	std::cin.get();
 
 	return;
 }
