@@ -17,13 +17,45 @@ double** M_G = nullptr; // Матрица проводимостей
 int main(void) {
 	//HW1();
 
-	Complex num1(13, 1);
+	/*Complex num1(13, 1);
 	Complex num2(7, -6);
 
 	std::cout << num1 << " + " << num2 << " : " << num1 + num2 << std::endl;
 	std::cout << num1 << " - " << num2 << " : " << num1 - num2 << std::endl;
 	std::cout << num1 << " * " << num2 << " : " << num1 * num2 << std::endl;
-	std::cout << num1 << " / " << num2 << " : " << num1 / num2 << std::endl;
+	std::cout << num1 << " / " << num2 << " : " << num1 / num2 << std::endl;*/
+
+
+	Complex num1(1, 0);
+	Complex num2(1, 0);
+	Complex num3(1, 0);
+	Complex num4(0);
+	Complex num5(18, 84.446);
+	Complex num6(0, -92.362);
+	Complex num7(0, -62.121);
+	Complex num8(-18, -84.446);
+	Complex num9(0);
+
+	Complex** M_I__full = nullptr;
+	M_I__full = new Complex* [3];
+	FORi(0, 3) M_I__full[i] = new Complex[3];
+	M_I__full[0][0] = num1;
+	M_I__full[0][1] = num2;
+	M_I__full[0][2] = num3;
+	M_I__full[1][0] = num4;
+	M_I__full[1][1] = num5;
+	M_I__full[1][2] = num6;
+	M_I__full[2][0] = num7;
+	M_I__full[2][1] = num8;
+	M_I__full[2][2] = num9;
+
+	Complex E1_(0);
+	Complex E2_(0, 48.79);
+	Complex E3_(-13.635, 16.25);
+	Complex* M_E_ = new Complex[3] { E1_, E2_, E3_ };
+
+	Matrix3x3<Complex> M_I_(M_I__full);
+	std::cout << "I1_ = " << M_I_.Det1(M_E_) / M_I_.Det() << std::endl;
 
 
 	std::cin.clear(); std::cin.ignore(std::cin.rdbuf()->in_avail()); _flushall();
@@ -113,7 +145,7 @@ void HW1(void) {
 	arr_E1[1] = E2 - E3 - E5;
 	arr_E1[2] = E4 + E5 - E6;
 	
-	Matrix3x3 Matrix_R(M_R);
+	Matrix3x3<double> Matrix_R(M_R);
 	I11 = Matrix_R.Det1(arr_E1) / Matrix_R.Det();
 	I22 = Matrix_R.Det2(arr_E1) / Matrix_R.Det();
 	I33 = Matrix_R.Det3(arr_E1) / Matrix_R.Det();
@@ -160,7 +192,7 @@ void HW1(void) {
 	arr_E2[1] = (E1 / R1) + (E2 / R2) + (E3 / R3);
 	arr_E2[2] = -(E3 / R3) + (E5 / R5) + (E6 / R6);
 
-	Matrix3x3 Matrix_G(M_G);
+	Matrix3x3<double> Matrix_G(M_G);
 	phi1 = Matrix_G.Det1(arr_E2) / Matrix_G.Det();
 	phi2 = Matrix_G.Det2(arr_E2) / Matrix_G.Det();
 	phi3 = Matrix_G.Det3(arr_E2) / Matrix_G.Det();

@@ -1,6 +1,6 @@
 #include <iostream>
 #pragma once
-class Complex {
+struct Complex {
 private:
 	double Re;
 	double Im;
