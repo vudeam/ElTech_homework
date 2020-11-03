@@ -9,6 +9,7 @@ protected:
 public:
 	Matrix(void);
 	Matrix(_Item**, size_t, size_t);
+	//Matrix(_Item***, size_t, size_t);
 	_Item Det(void);
 	void Print(void);
 };

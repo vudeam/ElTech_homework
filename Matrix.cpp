@@ -1,4 +1,10 @@
-﻿//#include <iostream>
+﻿/*
+* Everything below does not work due to some template magic.
+* It does not allow to link template declarations and definitions
+* if they are not in the same file.
+* So I moved everything from here to the header file.
+*/
+//#include <iostream>
 //#include "Matrix.h"
 //
 //template <class _Item> Matrix<_Item>::Matrix(void) {};
